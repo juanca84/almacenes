@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('articulos', {
+    await queryInterface.createTable('notas_salidas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,19 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       codigo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      descripcion: {
-        type: Sequelize.STRING
-      },
-      cuenta_contable_id: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'cuentas_contables',
-          key: 'id',
-          as: 'cuenta_contable_id',
-        }
+      fecha_salida: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
       estado: {
         type: Sequelize.ENUM('ACTIVO', 'INACTIVO'),
@@ -39,6 +32,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('articulos');
+    await queryInterface.dropTable('notas_salidas');
   }
 };
