@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     nota_salida_id: DataTypes.INTEGER,
     cantidad: DataTypes.INTEGER,
     precio_unitario: DataTypes.DECIMAL,
-    tipo: DataTypes.ENUM,
-    estado: DataTypes.ENUM
+    tipo: DataTypes.ENUM('INGRESO', 'SALIDA'),
+    estado: DataTypes.ENUM('ACTIVO', 'INACTIVO')
   }, {
     sequelize,
     modelName: 'EntradaSalida',
