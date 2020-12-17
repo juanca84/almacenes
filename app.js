@@ -13,9 +13,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // require apis
-const cuentasRoutes = require('./routes/cuenta_contable');
+const cuentasRoutes = require('./routes/cuentas_contables');
+const articulosRoutes = require('./routes/articulos');
 
 app.use('/api', cuentasRoutes);
+app.use('/api', articulosRoutes);
 
 app.get('/', (req, res) => {
   res.send('Sistema de almacenes')
