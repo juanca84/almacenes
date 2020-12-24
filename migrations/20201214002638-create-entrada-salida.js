@@ -47,6 +47,7 @@ module.exports = {
       },
       tipo: {
         type: Sequelize.ENUM('INGRESO', 'SALIDA'),
+        defaultValue: 'INGRESO',
         allowNull: false
       },
       estado: {

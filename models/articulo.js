@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'cuenta_contable_id',
       onDelete: 'CASCADE'
     })
+    Articulo.hasMany(models.EntradaSalida, {
+      foreignKey: 'articulo_id',
+    })
   };
   return Articulo;
 };

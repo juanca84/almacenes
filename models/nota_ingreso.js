@@ -20,7 +20,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'NotaIngreso',
-    tableName: 'notas_ingreso'
+    tableName: 'notas_ingresos'
   });
+  NotaIngreso.associate = function(models) {
+    NotaIngreso.hasMany(models.EntradaSalida, {
+      foreignKey: 'nota_ingreso_id',
+    });
+  };
   return NotaIngreso;
 };

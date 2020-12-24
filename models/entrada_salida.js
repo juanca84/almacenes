@@ -24,7 +24,22 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'EntradaSalida',
-    tableName: 'entradas_salidas'
+    tableName: 'entradas_salidas',
+    name: {
+      singular: "entrada_salida",
+      plural: "entradas_salidas"
+    }
   });
+  EntradaSalida.associate = function(models) {
+    EntradaSalida.belongsTo(models.NotaIngreso, {
+      foreignKey: 'nota_ingreso_id',
+      onDelete: 'CASCADE'
+    });
+    EntradaSalida.belongsTo(models.Articulo, {
+      foreignKey: 'articulo_id',
+      onDelete: 'CASCADE'
+    });
+
+  };
   return EntradaSalida;
 };
