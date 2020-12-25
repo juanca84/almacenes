@@ -22,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'NotaSalida',
     tableName: 'notas_salidas'
   });
+  NotaSalida.associate = function(models) {
+    NotaSalida.hasMany(models.EntradaSalida, {
+      foreignKey: 'nota_salida_id',
+    });
+  };
   return NotaSalida;
 };

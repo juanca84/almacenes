@@ -2,19 +2,20 @@ const router = require("express").Router();
 const db = require("../models");;
 
 // POST request
-router.post("/ingresos", async (req, res) => {
+router.post("/salidas", async (req, res) => {
     try {
-        const ingreso = {
+        req.body.salidas.map(o => o.tipo = 'SALIDA')
+        const salida = {
             codigo: req.body.codigo,
-            fecha_ingreso: req.body.fecha_ingreso,
-            entradas_salidas: req.body.entradas
+            fecha_salida: req.body.fecha_salida,
+            entradas_salidas: req.body.salidas
         }
-        await db.NotaIngreso.create(ingreso, {
+        await db.NotaSalida.create(salida, {
             include: [db.EntradaSalida],
           });
         res.json({
             success: true,
-            message: "Exitosamente añadido el ingreso."
+            message: "Exitosamente añadida la salida."
         });
     } catch (err) {
         res.status(500).json({
@@ -26,9 +27,9 @@ router.post("/ingresos", async (req, res) => {
 
 
 // GET request 
-router.get("/ingresos", async (req, res) => {
+router.get("/salidas", async (req, res) => {
     try {
-        const ingresos = await db.NotaIngreso
+        const salidas = await db.NotaSalida
                                 .findAll({
                                             where: {
                                                 estado: 'ACTIVO'
@@ -37,7 +38,7 @@ router.get("/ingresos", async (req, res) => {
                                         });
         res.json({
             success: true,
-            data: ingresos
+            data: salidas
         });
     } catch (err) {
         res.status(500).json({
@@ -48,9 +49,9 @@ router.get("/ingresos", async (req, res) => {
 });
 
 // GET request
-router.get("/ingresos/:id", async (req, res) => {
+router.get("/salidas/:id", async (req, res) => {
     try {
-        const ingreso = await db.NotaIngreso
+        const salida = await db.NotaSalida
                                .findOne({
                                    where: {
                                        id: req.params.id
@@ -59,7 +60,7 @@ router.get("/ingresos/:id", async (req, res) => {
                                });
         res.json({
             success: true,
-            data: ingreso
+            data: salida
         });
     } catch (err) {
         res.status(500).json({
@@ -91,12 +92,12 @@ router.get("/ingresos/:id", async (req, res) => {
 // });
 
 // DELETE request
-router.delete("/ingresos/:id", async (req, res) => {
+router.delete("/salidas/:id", async (req, res) => {
     try {
-        const ingreso = await db.NotaIngreso.findByPk(req.params.id);
-        ingreso.estado = 'INACTIVO';
+        const salida = await db.NotaSalida.findByPk(req.params.id);
+        salida.estado = 'INACTIVO';
 
-        await ingreso.save();
+        await salida.save();
         res.json({
             success: true,
             message: "Exitosamente inactivada el ingreso."

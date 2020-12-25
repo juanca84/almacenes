@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'nota_ingreso_id',
       onDelete: 'CASCADE'
     });
+    EntradaSalida.belongsTo(models.NotaSalida, {
+      foreignKey: 'nota_salida_id',
+      onDelete: 'CASCADE'
+    });
     EntradaSalida.belongsTo(models.Articulo, {
       foreignKey: 'articulo_id',
       onDelete: 'CASCADE'
