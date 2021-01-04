@@ -18,10 +18,10 @@ const articulosRoutes = require('./routes/articulos');
 const ingresosRoutes = require('./routes/notas_ingresos');
 const salidasRoutes = require('./routes/notas_salidas');
 
-app.use('/api', cuentasRoutes);
-app.use('/api', articulosRoutes);
-app.use('/api', ingresosRoutes);
-app.use('/api', salidasRoutes);
+app.use('/api/v1', cuentasRoutes);
+app.use('/api/v1', articulosRoutes);
+app.use('/api/v1', ingresosRoutes);
+app.use('/api/v1', salidasRoutes);
 
 app.get('/', (req, res) => {
   res.send('Sistema de almacenes')

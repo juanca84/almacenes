@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Servicios Backend de Almacenes
+  version: '1.0.0'
+  description: Los servicios API que brinda el backend de alamacenes.
+servers:
+  - url: 'http://localhost:4000/api/v1'
+paths:
+  /cuentas:
+    post:
+      summary: Crear cuenta contable.
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                  message:
+                    type: string
+      operationId: post-crear-cuentas
+      description: 'El servicio crea un objeto cuenta contable.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codigo:
+                  type: string
+                nombre:
+                  type: string
+    get:
+      summary: Lista cuentas contables.
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+      operationId: post-link_notificacion
+      description: 'notificar, proceso concluido, proceso eliminado por timeout, procesos cancelado por el usuario, proceso con error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idSolicitud:
+                  type: string
+                documentos:
+                  type:
+                    - string
+                    - array
+                  items:
+                    type: object
+                    properties:
+                      hash:
+                        type: string
+                      estado:
+                        type: string
+  /documento/hash:
+    get:
+      summary: documento a descargar
+      tags: []
+      responses:
+        '200':
+          description: Successfully returned a list of artists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - username
+                  properties:
+                    artist_name:
+                      type: string
+                    artist_genre:
+                      type: string
+                    albums_recorded:
+                      type: integer
+                    username:
+                      type: string
+      operationId: get-documento
+      requestBody: {}
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes:
+    tokenSolicitud:
+      type: http
+      scheme: Bearer
